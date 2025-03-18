@@ -89,7 +89,7 @@ impl POP3Client {
         };
     }
 
-    fn new_session(&self) -> Result<POP3ClientSession, String> {
+    pub fn new_session(&self) -> Result<POP3ClientSession, String> {
         let full_address = format!("{}:{}", self.hostname, self.port);
         let session_connection: TcpStream = match TcpStream::connect(full_address) {
             Ok(session_connection) => session_connection,
