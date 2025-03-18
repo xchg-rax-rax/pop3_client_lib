@@ -12,7 +12,7 @@ pub struct Message {
 }
 
 // Represents most important metadata of an email
-struct MessageInfo {
+pub struct MessageInfo {
     maildrop_number: u32,
     size: u32,
     origination_date: String,
@@ -76,7 +76,7 @@ impl MessageInfo {
 }
 
 // Object for managing a series of sessions with a single POP3 server
-struct POP3Client {
+pub struct POP3Client {
     hostname: String,
     port: u32,
 }
@@ -108,7 +108,7 @@ enum POP3ClientSessionStates {
 }
 
 // Object for managing interactions with a single connection with a POP3 server
-struct POP3ClientSession {
+pub struct POP3ClientSession {
     session_api: POP3ClientSessionAPI,
     msg_id: Option<String>,
     state: POP3ClientSessionStates
