@@ -82,6 +82,13 @@ pub struct POP3Client {
 }
 
 impl POP3Client {
+    pub fn new(hostname: String, port: u32) -> Self {
+        return POP3Client{
+            hostname,
+            port,
+        };
+    }
+
     fn new_session(&self) -> Result<POP3ClientSession, String> {
         let full_address = format!("{}:{}", self.hostname, self.port);
         let session_connection: TcpStream = match TcpStream::connect(full_address) {
