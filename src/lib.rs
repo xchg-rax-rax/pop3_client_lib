@@ -97,6 +97,8 @@ impl POP3Client {
                 return Err(format!("Failed to connect to POP3 server:\n{:?}", e));
             }
         };
+        // Sleep for a second to allow the server to respond
+        std::thread::sleep(std::time::Duration::from_secs(1));
         let session: POP3ClientSession = match POP3ClientSession::new(session_connection) {
             Ok(session) => session,
             Err(e) => {
@@ -126,6 +128,7 @@ impl POP3ClientSession {
         let mut session_api: POP3ClientSessionAPI = POP3ClientSessionAPI {
             session_connection
         };
+
         let greeting: String= match POP3ClientSession::read_greeting(&mut session_api) {
             Ok(greeting) => greeting,
             Err(e) => {
