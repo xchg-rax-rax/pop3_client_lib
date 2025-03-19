@@ -100,7 +100,7 @@ impl POP3Client {
         let session: POP3ClientSession = match POP3ClientSession::new(session_connection) {
             Ok(session) => session,
             Err(e) => {
-                return Err(format!("Failed to initialize session:\n{:?}", e));
+                return Err(format!("[!] Failed to initialize session:\n{:?}", e));
             }
         };
         return Ok(session);
@@ -869,6 +869,10 @@ impl POP3ClientSessionAPI {
         if bytes_written == 0 {
             return Err(format!("Failed to send any data to the server"));
         }
+        
+        // Sleep for a second to allow the server to respond
+        std::thread::sleep(std::time::Duration::from_secs(1));
+
         let response = match self.read_string() {
             Ok(response ) => response ,
             Err(e) => {
